@@ -2,10 +2,10 @@ import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-const input = document.querySelector("#datetime-picker");
-let timerId = null;
 
 const refs = {
+	timerId: null,
+	input: document.querySelector("#datetime-picker"),
 	btnTimerStart: document.querySelector('[data-start]'),
 	timerFieldDays: document.querySelector('[data-days]'),
 	timerFielHours: document.querySelector('[data-hours]'),
@@ -58,7 +58,7 @@ const addLeadingZero = (value) => {
 function onTimerStart() {
 	const selectedDate = fp.selectedDates[0];
 
-	timerId = setInterval(() => {
+	refs.timerId = setInterval(() => {
 		const startTime = new Date();
 		const countdown = selectedDate - startTime;
 		refs.btnTimerStart.disabled = true;
@@ -78,5 +78,5 @@ function updateTimerFace({ days, hours, minutes, seconds }) {
 	refs.timerFieldSeconds.textContent = addLeadingZero(seconds);
 }
 
-const fp = flatpickr(input, options);
+const fp = flatpickr(refs.input, options);
 refs.btnTimerStart.addEventListener('click', onTimerStart);

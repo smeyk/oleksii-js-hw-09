@@ -11,10 +11,10 @@ function getRandomHexColor() {
 }
 
 const changeBodyBgColor = () => {
+	startBtn.disabled = true;
+	stopBtn.disabled = false;
 	timerId = setInterval(() => {
 		body.style.backgroundColor = getRandomHexColor();
-		startBtn.disabled = true;
-		stopBtn.disabled = false;
 	}, 1000);
 }
 
